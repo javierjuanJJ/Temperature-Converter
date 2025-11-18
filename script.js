@@ -31,3 +31,25 @@ function fromCelsius(value, unit) {
     case 'kelvin': return value + 273.15;
   }
 }
+
+
+const form = document.getElementById('temp-form');
+const result = document.getElementById('result');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const value = parseFloat(inputValue.value);
+  const fromUnit = inputUnit.value;
+  const toUnit = outputUnit.value;
+
+  if (isNaN(value)) {
+    result.textContent = 'Please enter a valid number.';
+    return;
+  }
+
+  const celsiusValue = toCelsius(value, fromUnit);
+  const convertedValue = fromCelsius(celsiusValue, toUnit);
+
+  result.textContent = `${value}° ${fromUnit} = ${convertedValue.toFixed(2)}° ${toUnit}`;
+});
